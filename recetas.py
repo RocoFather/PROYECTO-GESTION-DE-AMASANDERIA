@@ -32,6 +32,16 @@ def mostrar_produccion(produccion_diaria,pan_nombre):
 
 #REGISTRAR VENTAS
 def registrar_ventas(produccion_diaria,ventas_diarias,pan_nombre):
+    print("Registro de ventas diarias:")
+    for i in range(len(produccion_diaria)):
+        venta = ventas_diarias[i]
+        if venta > produccion_diaria[i]:
+            print(f" No hay suficiente {pan_nombre[i]} disponible. Venta ajustada a {produccion_diaria[i]:.2f} kg.")
+            ventas_diarias[i] = produccion_diaria[i]
+        else:
+            print(f"{pan_nombre[i]}: Venta registrada de {venta:.2f} kg.")
+        produccion_diaria[i] -= ventas_diarias[i]
+    return produccion_diaria
     
     
 

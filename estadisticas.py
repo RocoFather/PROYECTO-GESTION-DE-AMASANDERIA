@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-
+# Pan más vendido y menos vendido
 def pan_mas_menos_vendido(ventas_diarias, pan_nombre):
   
     totales = [sum(ventas) for ventas in ventas_diarias]
@@ -15,7 +15,7 @@ def pan_mas_menos_vendido(ventas_diarias, pan_nombre):
     print(f"El pan menos vendido fue : {pan_menos_vendido} con {menos_vendido:.2f} kg")
    
 
-
+# Franja horaria con más y menos ventas
 def franja_horaria_mas_menos_ventas(ventas_diarias):
  
     totales_por_franja = [sum(franja) for franja in zip(*ventas_diarias)]
@@ -28,6 +28,7 @@ def franja_horaria_mas_menos_ventas(ventas_diarias):
     print(f"Franja horaria con más ventas: {franjas[totales_por_franja.index(franja_mas_ventas)]} con {franja_mas_ventas:.2f} kg")
     print(f"Franja horaria con menos ventas: {franjas[totales_por_franja.index(franja_menos_ventas)]} con {franja_menos_ventas:.2f} kg")
 
+# Ganancia total e inversión total
 def ganancia_e_inversion(recursos, precios_por_kg):
     inversion_total = sum([recursos[i] * precios_por_kg[i] for i in range(len(recursos))])
     print(f"Inversión total: ${inversion_total:.2f}")

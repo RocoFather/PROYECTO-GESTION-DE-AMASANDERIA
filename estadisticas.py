@@ -32,7 +32,7 @@ def ganancia_e_inversion(recursos, precios_por_kg):
     inversion_total = sum([recursos[i] * precios_por_kg[i] for i in range(len(recursos))])
     print(f"Inversión total: ${inversion_total:.2f}")
     
-  return inversion_total
+    return inversion_total
 
 def ganancia_liquida_meta(): #?
 

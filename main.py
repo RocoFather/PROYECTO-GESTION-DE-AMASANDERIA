@@ -4,7 +4,7 @@ import recetas
 import estadisticas
 import time as t
 #LISTAS CON NOMBRES
-recursos_nombre: ["Harina","Agua","Levadura","Manteca","Azucar","Sal"]
+recursos_nombre: ["Harina","Agua","Levadura","Manteca","Azucar","Sal"] # type: ignore
 pan_nombre = ["Hallulla","Marraqueta","Dobladitas","Ciabatta"
               ,"Pan de completo","Coliza","Integral","Pan de hamburguesa"]
 #RECURSOS
@@ -13,16 +13,19 @@ recursos_repartidos = [0,0,0,0,0,0]
 #PRODUCCION DIARIA
 produccion_diaria = [0,0,0,0,0,0,0,0]
 #MATRIZ DE VENTAS
+# MATRIZ DE VENTAS
 ventas_diarias = [
-  [0,0,0]
-  [0,0,0]
-  [0,0,0]
-  [0,0,0]
-  [0,0,0]
-  [0,0,0]
-  [0,0,0]
-  [0,0,0]
+    [0.0, 0.0, 0.0],  # First row
+    [0.0, 0.0, 0.0],  # Second row
+    [0.0, 0.0, 0.0],  # Third row
+    [0.0, 0.0, 0.0],  # Fourth row
+    [0.0, 0.0, 0.0],  # Fifth row
+    [0.0, 0.0, 0.0],  # Sixth row
+    [0.0, 0.0, 0.0],  # Seventh row
+    [0.0, 0.0, 0.0]   # Eighth row
 ]
+
+
 #PRECIOS
 precios_pan = [2190,2290,3190,3290,2990,3390,2850,2990]
 precios_recursos = [50,1000,6000,2500,1500,400]
@@ -43,12 +46,12 @@ def inicio_registro():
     recursos[5] = float(input("Ingrese la cantidad de sal en kg: "))
     meta_ganancia = float(input("Ingrese la meta de ganancia liquida: "))
     t.sleep(1)
-    print("Calculando produccion_diaria")
-    recursos_repartidos = recursos_repartidos(recursos)
+    print("Calculando produccion diaria")
+    recursos_repartidos = recetas.repartir_recursos(recursos)
     produccion_diaria = recetas.calcular_produccion_diaria(recursos_repartidos)
     t.sleep(1)
     print("Producción calculada con exito...")
-    t.slepp(1)
+    t.sleep(1)
     recetas.mostrar_produccion(produccion_diaria,pan_nombre)
 
     menu_dia()
@@ -71,13 +74,13 @@ def menu_dia():
             recetas.mostrar_ventas(ventas_diarias,pan_nombre)
 
         elif o == "3":
-            estadisticas.menu_estadisticas(produccion_diaria, ventas_diarias, meta_ganancia,precios_pan,precios_recursos)
+            estadisticas.menu_estadisticas(recursos, ventas_diarias, meta_ganancia,precios_recursos,pan_nombre,precios_pan)
 
         elif o == "4":
             o2 = input("Esta seguro de terminar el dia y generar el informe? (si/no): ")
             if o2.lower() == "si":
                 contador_dia += 1
-                estadisticas.finalizar_dia(ventas_diarias, produccion_diaria, meta_ganancia, contador_dia)
+                estadisticas.finalizar_dia(ventas_diarias, produccion_diaria, meta_ganancia, contador_dia, precios_recursos, recursos,pan_nombre)
                 break
             elif o2.lower() == "no":
                 pass
@@ -98,7 +101,7 @@ while True:
     o = input("Escoja una opcion (1/2): ")
     if o == "1":
         print("Iniciando registro diario. ")
-        recetas.incio_registro()
+        inicio_registro()
     
     elif o == "2":
         print("Saliendo del sistema. ")

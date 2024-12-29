@@ -16,9 +16,23 @@ def pan_mas_menos_vendido(ventas_diarias, pan_nombre):
    
 
 
-def franja_horaria_mas_y_menos_ventas():
+def franja_horaria_mas_menos_ventas(ventas_diarias):
+ 
+    totales_por_franja = [sum(franja) for franja in zip(*ventas_diarias)]
+    
+    franja_mas_ventas = max(totales_por_franja)
+    franja_menos_ventas = min(totales_por_franja)
 
-def ganancia_e_inversion_total():
+    franjas = ["Mañana", "Tarde", "Noche"]
+    
+    print(f"Franja horaria con más ventas: {franjas[totales_por_franja.index(franja_mas_ventas)]} con {franja_mas_ventas:.2f} kg")
+    print(f"Franja horaria con menos ventas: {franjas[totales_por_franja.index(franja_menos_ventas)]} con {franja_menos_ventas:.2f} kg")
+
+def ganancia_e_inversion(recursos, precios_por_kg):
+    inversion_total = sum([recursos[i] * precios_por_kg[i] for i in range(len(recursos))])
+    print(f"Inversión total: ${inversion_total:.2f}")
+    
+  return inversion_total
 
 def ganancia_liquida_meta(): #?
 

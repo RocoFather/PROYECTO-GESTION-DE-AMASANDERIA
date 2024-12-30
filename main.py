@@ -77,7 +77,7 @@ def menu_dia():
             try:
                  recetas.mostrar_ventas(ventas_diarias,pan_nombre)
             except Exception as e:
-                print(f"Erroor al mostrar las ventas: {e}")
+                print(f"Error al mostrar las ventas: {e}")
         elif o == "3":
              try:
                  estadisticas.menu_estadisticas(recursos, ventas_diarias, meta_ganancia,precios_recursos,pan_nombre,precios_pan)

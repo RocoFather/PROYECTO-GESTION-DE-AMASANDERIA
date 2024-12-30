@@ -68,19 +68,29 @@ def menu_dia():
         print("5. Volver al menu principal")
         o = input("Escoja una opcion (1-5):")
         if o == "1":
-            recetas.registrar_ventas(produccion_diaria,ventas_diarias,pan_nombre)
+            try:
+                recetas.registrar_ventas(produccion_diaria,ventas_diarias,pan_nombre)
+            except ValueError:
+                print("Error: porfavor ingrese un valor valido.")
         
         elif o == "2":
-            recetas.mostrar_ventas(ventas_diarias,pan_nombre)
-
+            try:
+                 recetas.mostrar_ventas(ventas_diarias,pan_nombre)
+            except Exception as e:
+                print(f"Erroor al mostrar las ventas: {e}")
         elif o == "3":
-            estadisticas.menu_estadisticas(recursos, ventas_diarias, meta_ganancia,precios_recursos,pan_nombre,precios_pan)
-
+             try:
+                 estadisticas.menu_estadisticas(recursos, ventas_diarias, meta_ganancia,precios_recursos,pan_nombre,precios_pan)
+             except Exception as e:
+                print(f"Error al generar estadisticas: {e}")
         elif o == "4":
             o2 = input("Esta seguro de terminar el dia y generar el informe? (si/no): ")
             if o2.lower() == "si":
                 contador_dia += 1
-                estadisticas.finalizar_dia(ventas_diarias, produccion_diaria, meta_ganancia, contador_dia, precios_recursos, recursos,pan_nombre)
+                try:
+                  estadisticas.finalizar_dia(ventas_diarias, produccion_diaria, meta_ganancia, contador_dia, precios_recursos, recursos,pan_nombre)
+                except Exception as e:
+                    print(f"Error al finalizar el dia: {e}")
                 break
             elif o2.lower() == "no":
                 pass

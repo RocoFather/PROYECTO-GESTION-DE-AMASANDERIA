@@ -36,25 +36,47 @@ contador_dia = 0
 
 #funcion para registro diario
 def inicio_registro():
-    global recursos,produccion_diaria,meta_ganancia
+    global recursos, produccion_diaria, meta_ganancia
+    
     print("------Registro de recursos diarios------")
-    recursos[0] = float(input("Ingrese la cantidad de harina en kg: "))
-    recursos[1] = float(input("Ingrese la cantidad de agua en kg: "))
-    recursos[2] = float(input("Ingrese la cantidad de levadura en kg: "))
-    recursos[3] = float(input("Ingrese la cantidad de manteca en kg: "))
-    recursos[4] = float(input("Ingrese la cantidad de azucar en kg: "))
-    recursos[5] = float(input("Ingrese la cantidad de sal en kg: "))
-    meta_ganancia = float(input("Ingrese la meta de ganancia liquida: "))
+    
+    for i, recurso in enumerate(["harina", "agua", "levadura", "manteca", "azúcar", "sal"]):
+        while True:
+            try:
+                valor = float(input(f"Ingrese la cantidad de {recurso} en kg: "))
+                if valor < 0:
+                    print("Error: La cantidad no puede ser negativa. Intente de nuevo.")
+                else:
+                    recursos[i] = valor
+                    break
+            except ValueError:
+                print("Error: Por favor ingrese un número válido. Intente de nuevo.")
+
+    while True:
+        try:
+            meta_ganancia = float(input("Ingrese la meta de ganancia líquida: "))
+            if meta_ganancia < 0:
+                print("Error: La meta de ganancia no puede ser negativa. Intente de nuevo.")
+            else:
+                break
+        except ValueError:
+            print("Error: Por favor ingrese un número válido. Intente de nuevo.")
+
+    
     t.sleep(1)
-    print("Calculando produccion diaria")
+    print("Calculando producción diaria...")
+    
     recursos_repartidos = recetas.repartir_recursos(recursos)
     produccion_diaria = recetas.calcular_produccion_diaria(recursos_repartidos)
+    
     t.sleep(1)
-    print("Producción calculada con exito...")
+    print("Producción calculada con éxito...")
+    
     t.sleep(1)
-    recetas.mostrar_produccion(produccion_diaria,pan_nombre)
-
+    recetas.mostrar_produccion(produccion_diaria, pan_nombre)
+  
     menu_dia()
+
 
 #funcion menu control del dia
 def menu_dia():

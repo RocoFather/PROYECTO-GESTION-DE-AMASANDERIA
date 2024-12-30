@@ -36,32 +36,35 @@ def mostrar_produccion(produccion_diaria,pan_nombre):
         print(f"{pan_nombre[i]}: {produccion_diaria[i]:.2f} kg")
 
 #REGISTRAR VENTAS-------------------------------------------------------
-def registrar_ventas(produccion_diaria,ventas_diarias,pan_nombre):
-    print("Registro de ventas diarias:")
+def registrar_ventas(produccion_diaria, ventas_diarias, pan_nombre):
+    print("\n--- Registro de ventas diarias ---")
     for i in range(len(pan_nombre)):
         print(f"{i + 1}. {pan_nombre[i]}")
-    tipo_pan = int(input("Seleccione el tipo de pan (1-8): ")) - 1
-#valida que sea un valor correcto
-    if tipo_pan < 0 or tipo_pan >= len(pan_nombre):
-        print("Seleccione una opcion correcta porfavor. ")
-        return
-#elegir franja horaria
-    print("1. Mañana    2. Tarde    3. Noche")
-    horario = int(input("Seleccione la franja horaria (1-3): ")) - 1
-#valida que sea un horario correcto
-    if horario < 0 or horario >= 3:
-        print("Franja horaria inválida.")
-        return
 
-    cantidad_vendida = float(input("Ingrese la cantidad vendida (kg): "))
-#valida que una cantida correcta y no mayor a la produccion diaria
-    if cantidad_vendida < 0 or cantidad_vendida > produccion_diaria[tipo_pan]:
-        print("Cantidad inválida o excede la producción disponible.")
-        return
+    try:
+        tipo_pan = int(input("Seleccione el tipo de pan (1-8): ")) - 1
+        if tipo_pan < 0 or tipo_pan >= len(pan_nombre):
+            print("Seleccione una opción correcta por favor.")
+            return
 
-    ventas_diarias[tipo_pan][horario] += cantidad_vendida
-    produccion_diaria[tipo_pan] -= cantidad_vendida
-    print("Venta registrada correctamente.")
+        print("1. Mañana    2. Tarde    3. Noche")
+        horario = int(input("Seleccione la franja horaria (1-3): ")) - 1
+        if horario < 0 or horario >= 3:
+            print("Franja horaria invalida.")
+            return
+
+        cantidad_vendida = float(input("Ingrese la cantidad vendida (kg): "))
+        if cantidad_vendida < 0 or cantidad_vendida > produccion_diaria[tipo_pan]:
+            print("Cantidad invalida o excede la producción disponible.")
+            return
+
+        ventas_diarias[tipo_pan][horario] += cantidad_vendida
+        produccion_diaria[tipo_pan] -= cantidad_vendida
+        print("Venta registrada correctamente.")
+
+    except ValueError:
+        print("Entrada invalida. Por favor, ingrese un numero.")
+
     
 #MOSTRAR VENTAS-----------------------------------------------------------
 def mostrar_ventas(ventas_diarias,pan_nombre):

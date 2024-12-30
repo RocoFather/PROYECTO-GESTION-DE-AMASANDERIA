@@ -54,11 +54,12 @@ def inicio_registro():
 
     while True:
         try:
-            meta_ganancia = float(input("Ingrese la meta de ganancia líquida: "))
+            meta_ganancia = float(input("Ingrese la meta de ganancia líquida (puede ser negativa para pérdidas): "))
             if meta_ganancia < 0:
-                print("Error: La meta de ganancia no puede ser negativa. Intente de nuevo.")
+                print(f"Advertencia: Está estimando una pérdida de {-meta_ganancia:.2f} unidades monetarias.")
             else:
-                break
+                print(f"Ha establecido una meta de ganancia de {meta_ganancia:.2f} unidades monetarias.")
+            break  
         except ValueError:
             print("Error: Por favor ingrese un número válido. Intente de nuevo.")
 
